@@ -65,6 +65,7 @@ def train_ppo():
     number_of_steps_per_epoch = 4000
     maximum_number_of_steps = 4000000 # maximum_number_of_steps / number_of_steps_per_epoch = 10 epochs
     seeds = [0]
+    cost_limit = 50
     # The num_pool is different from number_of_envs_to_run_in_parallel
     # One experiment can have multiple envs run.
     # number_of_experiments_run_at_the_same_time must be divisible by number_of_envs_to_run_in_parallel 
@@ -112,9 +113,9 @@ def train_ppo():
     # Set no seeds
     eg.add('seed', seeds)
 
-    # add this before eg.run(...)
-    eg.add('lagrange_cfgs:cost_limit', [50])   # try 50, 100, 200
-
+    # Set cost limit, the higher the limit the more the agent can afford speed-costs
+    # i.e. it’ll drive quicker
+    eg.add('lagrange_cfgs:cost_limit', [cost_limit])
 
     # Train
     eg.run(train, num_pool=number_of_experiments_run_at_the_same_time, gpu_id=gpu_id)
