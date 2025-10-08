@@ -1,0 +1,50 @@
+# --- Python basics ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+.conda/
+
+# Packaging / build
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+
+# Testing / tooling
+.pytest_cache/
+.coverage*
+.tox/
+.nox/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# TensorBoard / ML trackers
+wandb/
+mlruns/
+events.out.tfevents.*
+*.tfevents.*
+
+# --- OmniSafe run artifacts ---
+exp-x/**
+
