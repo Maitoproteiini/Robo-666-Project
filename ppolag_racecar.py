@@ -18,7 +18,7 @@ logging.basicConfig(
 
 logger = logging.getLogger('PPO-Lag Minimal')
 
-ENVIRONMENT = ['SafetyRacecarGoal0-v0']
+ENVIRONMENT = ['SafetyRacecarGoal1-v0']
 PPO_LAG = ['PPOLag']
 
 
@@ -63,7 +63,7 @@ def train_ppo():
     number_of_envs_to_run_in_parallel = 8
     pytorch_thread_count = 1
     number_of_steps_per_epoch = 20480
-    maximum_number_of_steps = 1000000 # maximum_number_of_steps / number_of_steps_per_epoch = 10 epochs
+    maximum_number_of_steps = 3000000 # maximum_number_of_steps / number_of_steps_per_epoch = 10 epochs
     seeds = [0]
     cost_limit = 20
     entropy_coefficient = 0.01
