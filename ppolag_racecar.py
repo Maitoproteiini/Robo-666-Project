@@ -16,9 +16,9 @@ logging.basicConfig(
 )
 
 
-logger = logging.getLogger('PPO-Lag Minimal')
+logger = logging.getLogger('PPO-Lag-With-Obstacles')
 
-ENVIRONMENT = ['SafetyRacecarGoal0-v0']
+ENVIRONMENT = ['SafetyRacecarGoal1-v0']
 PPO_LAG = ['PPOLag']
 
 
@@ -57,19 +57,19 @@ def return_gpu():
 def train_ppo():
 
     # Set variables
-    experiment_name = 'PPO-Lag Minimal'
+    experiment_name = 'PPO-Lag-With-Obstacles'
     gpu_id = return_gpu()
     log_weights_and_biases = False
     number_of_envs_to_run_in_parallel = 8
     pytorch_thread_count = 1
-    number_of_steps_per_epoch = 20480
-    maximum_number_of_steps = 1000000 # maximum_number_of_steps / number_of_steps_per_epoch = 10 epochs
-    seeds = [0]
-    cost_limit = 20
-    entropy_coefficient = 0.01
+    number_of_steps_per_epoch = 4000
+    maximum_number_of_steps = 4000000 # maximum_number_of_steps / number_of_steps_per_epoch = 10 epochs
+    seeds = [1,2,3,4]
+    cost_limit = 25
+    entropy_coefficient = 0.005
     kl_divergence = 0.02
-    lambda_init = 0.005
-    lambda_learn_rate = 0.01
+    lambda_init = 0.001
+    lambda_learn_rate = 0.0
     # The num_pool is different from number_of_envs_to_run_in_parallel
     # One experiment can have multiple envs run.
     # number_of_experiments_run_at_the_same_time must be divisible by number_of_envs_to_run_in_parallel 
@@ -115,10 +115,10 @@ def train_ppo():
     eg.add('algo_cfgs:steps_per_epoch', [number_of_steps_per_epoch])
 
     # Set entropy bonus, the higher the value the more exploration is encouraged
-    eg.add('algo_cfgs:entropy_coef', [entropy_coefficient])
+    #eg.add('algo_cfgs:entropy_coef', [entropy_coefficient])
     
     # Set target_kl, the higher the value the more stable the training
-    eg.add('algo_cfgs:target_kl', [kl_divergence])
+    #eg.add('algo_cfgs:target_kl', [kl_divergence])
     
     # Set the number of epochs
     eg.add('train_cfgs:total_steps', [maximum_number_of_steps])
@@ -131,10 +131,10 @@ def train_ppo():
     eg.add('lagrange_cfgs:cost_limit', [cost_limit])
 
     # Set starting weight on safety cost, if too big the robot might not move
-    eg.add('lagrange_cfgs:lagrangian_multiplier_init', [lambda_init])
+    eg.add('lagrange_cfgs:lagrangian_multiplier_init', lambda_init)
 
     # Set learning rate for updating lambda, updates using the dual gradient step
-    eg.add('lagrange_cfgs:lambda_lr', [lambda_learn_rate])
+    # eg.add('lagrange_cfgs:lambda_lr', [lambda_learn_rate])
 
     # Train
     eg.run(train, num_pool=number_of_experiments_run_at_the_same_time, gpu_id=gpu_id)

@@ -18,7 +18,7 @@ logging.basicConfig(
 
 logger = logging.getLogger('PPO-Lag Minimal')
 
-ENVIRONMENT = ['SafetyRacecarGoal0-v0']
+ENVIRONMENT = ['SafetyCarGoal1-v0']
 PPO_LAG = ['PPOLag']
 
 
@@ -57,15 +57,15 @@ def return_gpu():
 def train_ppo():
 
     # Set variables
-    experiment_name = 'PPO-Lag Minimal'
+    experiment_name = 'PPO-Lag-With-Obstacles-Cos-Limit-25-DiffCarGoal1'
     gpu_id = return_gpu()
     log_weights_and_biases = False
-    number_of_envs_to_run_in_parallel = 4
-    pytorch_thread_count = 1
-    number_of_steps_per_epoch = 4000
-    maximum_number_of_steps = 4000000 # maximum_number_of_steps / number_of_steps_per_epoch = 10 epochs
-    seeds = [0]
-    cost_limit = 50
+    number_of_envs_to_run_in_parallel = 1
+    pytorch_thread_count = 5
+    number_of_steps_per_epoch = 5000
+    maximum_number_of_steps = 1000000 # maximum_number_of_steps / number_of_steps_per_epoch = 10 epochs
+    seeds = [4]
+    cost_limit = 25
     # The num_pool is different from number_of_envs_to_run_in_parallel
     # One experiment can have multiple envs run.
     # number_of_experiments_run_at_the_same_time must be divisible by number_of_envs_to_run_in_parallel 
