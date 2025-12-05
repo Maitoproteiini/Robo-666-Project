@@ -4,7 +4,9 @@ and uploading progress to Wandb.ai. You can alter the hyperparameters like shown
 custom_cfgs, otherwise the run uses the default values in Omnisafe.
 
 You need to input your Wandb.ai details, environment, hyperparameters and algorithm.
-Original script is from Naeim Ebrahimi Toulkani.
+
+Original script: Naeim Ebrahimi Toulkani.
+Current version: Adapted and documented for the Safe RL course project (ROBO.666 Project Work).
 
 Run this code on path with the following command:
 
@@ -30,11 +32,13 @@ os.environ.setdefault("WANDB_PROJECT", " ") # Add your Wandb.ai project
 
 print("PyTorch CUDA available:", torch.cuda.is_available())
 
+# Safety-Gymnasium environment identifier
 env_id = "SafetyCarGoal1-v0" # Change to the environment you want to run
+
 device_str = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-# Here you can customize the run's hyperparameters, check the config block below for 
-# hyperparameters' names and default values
+# Here you can customize the run's hyperparameters. 
+# Check the config block below for hyperparameters' names and default values
 custom_cfgs = {
     "seed": 0,
     "train_cfgs": {
@@ -103,5 +107,8 @@ custom_cfgs = {
 print("W&B target → entity:", os.environ.get("WANDB_ENTITY"),
       "project:", os.environ.get("WANDB_PROJECT"))
 
+# Instantiate Omnisafe agent with custom configs
 agent = omnisafe.Agent("PPOLag", env_id, custom_cfgs=custom_cfgs) # Change to your algorithm
+
+# Start training
 agent.learn()
