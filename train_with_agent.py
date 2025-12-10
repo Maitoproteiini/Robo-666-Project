@@ -28,7 +28,7 @@ PATH_TO_CONFIG = os.path.join(CONFIGURATION_DIR, CONFIGURATION_FILE)
 
 def main():
     env_id = "SafetyCarGoal1-v0"
-    logger.info(f"Starting training with SACLag on {env_id} environment")
+    logger.info(f"Starting training with PPOLag on {env_id} environment")
     if torch.xpu.is_available():
         device_str = "xpu:0"
     elif torch.cuda.is_available():
@@ -37,23 +37,20 @@ def main():
 
     logger.info(f"Using device: {device_str}")
 
-    with open(PATH_TO_CONFIG, "r") as f:
-        custom_cfg = yaml.safe_load(f)["defaults"]
+    # with open(PATH_TO_CONFIG, "r") as f:
+    #    custom_cfg = yaml.safe_load(f)["defaults"]
 
-    custom_cfg['train_cfgs']['device'] = device_str
-    logger.info(f"Configuration loaded from {PATH_TO_CONFIG}:")
-    logger.info(custom_cfg)
+    # custom_cfg['train_cfgs']['device'] = device_str
+    # logger.info(f"Configuration loaded from {PATH_TO_CONFIG}:")
+    # logger.info(custom_cfg)
 
     my_cfg = {    "train_cfgs": {
         "device": device_str,
-        "torch_threads": 16,
-        "vector_env_nums": 1,
-        "parallel": 1,
         "total_steps": 2_000_000,
     },}
     
 
-    agent = omnisafe.Agent(algo="SACLag", env_id=env_id, custom_cfgs=custom_cfg)
+    agent = omnisafe.Agent(algo="PPOLag", env_id=env_id, custom_cfgs=my_cfg)
     agent.learn()
 
 if __name__ == "__main__":
