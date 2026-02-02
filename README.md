@@ -6,7 +6,7 @@ We recommend using a linux machine with Ubuntu-22.04 distribution. For a windows
 
 When using VS Code, this project can be utilized and developed using a devcontainer, which is a docker container with a predefined image. This makes setup much easier, since all the dependencies will be installed automatically.
 
-To use the dev container setup, open VS Code and install [Dev Containers extension.](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) Then open VS Code again while at the root of this repo. You'll be prompted with a message that asks if you'd like to open the project in a container. Click yes. VS Code will then build the docker image. This will take a moment. Once all dependencies are installed, all the files are loaded and you can open a new terminal to run the python modules inside the container.
+To use the dev container setup, open VS Code and install [Dev Containers extension.](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) Then open VS Code again while at the root of this repo. You'll be prompted with a message that asks if you'd like to open the project in a container. Click "reopen in container". VS Code will then build the docker image. This will take a moment. Once all dependencies are installed, all the files are loaded and you can open a new terminal to run the python modules inside the container.
 
 If you wish to not use the devcontainers, follow the these steps.
 

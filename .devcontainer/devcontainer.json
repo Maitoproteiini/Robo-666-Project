@@ -1,16 +1,11 @@
 {
   "name": "Safety RL Dev Container",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "build": { "dockerfile": "Dockerfile" },
 
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
-  "workspaceFolder": "/workspace",
-
-  "features": {},
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
   "forwardPorts": [8888, 6006],
-
   "postCreateCommand": "[ -f pyproject.toml ] || [ -f setup.py ] || exit 0; pip install -e .",
 
   "customizations": {
@@ -23,7 +18,5 @@
     }
   },
 
-  "runArgs": [
-    "--shm-size=2g"
-  ]
+  "runArgs": ["--shm-size=2g"]
 }
