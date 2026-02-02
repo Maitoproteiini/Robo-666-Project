@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+"""
+This module exports videos of trained OmniSafe policies.
+The module can be run with command line arguments.
+This module takes at least one argument, the path to the trained model's run directory.
+Optionally, the number of evaluation episodes can be specified (default is 1).
+Flags:
+--run_path: Path to the trained model's run directory.
+--episodes: Number of evaluation episodes. Default is 1.
+
+Example usage:
+python3 -m play_policy runs/PPOLag-SafetyRacecarGoal0-v0
+"""
+
 import argparse
 import shutil
 import subprocess

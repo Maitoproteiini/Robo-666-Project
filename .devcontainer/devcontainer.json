@@ -1,0 +1,29 @@
+{
+  "name": "Safety RL Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
+
+  "features": {},
+
+  "forwardPorts": [8888, 6006],
+
+  "postCreateCommand": "[ -f pyproject.toml ] || [ -f setup.py ] || exit 0; pip install -e .",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+
+  "runArgs": [
+    "--shm-size=2g"
+  ]
+}
